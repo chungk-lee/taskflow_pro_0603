@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Local database (로컬 SQLite는 git 제외 — 스토리보드 H·03)
+*.db
+*.sqlite
+*.sqlite3
+taskflow.db
+
+# Node / Frontend / Vercel
+node_modules/
+.vercel/
+dist/
+
+# Claude Code local-only settings
+.claude/settings.local.json
+
+# OS
+.DS_Store
+Thumbs.db
