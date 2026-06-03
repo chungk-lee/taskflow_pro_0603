@@ -1,0 +1,14 @@
+.git
+.venv
+backend/.venv
+backend/requirements.txt
+*.db
+backend/tests
+**/__pycache__
+.pytest_cache
+docs
+openspec
+.claude
+.playwright-mcp
+node_modules
+fe-*.png

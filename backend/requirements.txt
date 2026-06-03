@@ -1,0 +1,11 @@
+fastapi
+uvicorn[standard]
+sqlalchemy>=2.0
+pydantic[email]>=2
+PyJWT
+bcrypt
+# 테스트
+pytest
+httpx
+# 운영(Neon Postgres)에서만 필요 — 로컬 SQLite는 표준 라이브러리 사용
+# psycopg[binary]
