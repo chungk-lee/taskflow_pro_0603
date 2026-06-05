@@ -49,6 +49,7 @@ export async function renderChat(app, params) {
   let timer = null;
   let interval = 5000;
   let alive = true;
+  const seen = new Set(); // 렌더된 메시지 id (send/poll 경합 시 중복 렌더 방지)
 
   function emptyState() {
     listEl.innerHTML = `
@@ -76,6 +77,7 @@ export async function renderChat(app, params) {
       node.querySelector("[data-del]").addEventListener("click", async () => {
         try {
           await apiDelete(`/messages/${m.id}`);
+          seen.delete(m.id);
           node.remove();
           if (!listEl.querySelector("[class*='flex-col']")) emptyState();
         } catch (e) {
@@ -87,11 +89,14 @@ export async function renderChat(app, params) {
   }
 
   function append(messages) {
-    if (messages.length === 0) return;
+    // 이미 렌더된 메시지(send 낙관적 추가 vs poll 수신 경합)는 건너뛴다
+    const fresh = messages.filter((m) => !seen.has(m.id));
+    if (fresh.length === 0) return;
     // empty state 제거
     if (listEl.querySelector(".justify-center")) listEl.innerHTML = "";
     const atBottom = listEl.scrollHeight - listEl.scrollTop - listEl.clientHeight < 60;
-    messages.forEach((m) => {
+    fresh.forEach((m) => {
+      seen.add(m.id);
       listEl.appendChild(bubble(m));
       if (m.id > lastId) lastId = m.id;
     });
