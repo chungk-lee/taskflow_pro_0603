@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "rewrites": [
+    { "source": "/auth/:path*", "destination": "/api/index" },
+    { "source": "/teams/:path*", "destination": "/api/index" },
+    { "source": "/tasks/:path*", "destination": "/api/index" },
+    { "source": "/messages/:path*", "destination": "/api/index" },
+    { "source": "/docs", "destination": "/api/index" },
+    { "source": "/redoc", "destination": "/api/index" },
+    { "source": "/openapi.json", "destination": "/api/index" },
+    { "source": "/health", "destination": "/api/index" }
+  ]
+}
